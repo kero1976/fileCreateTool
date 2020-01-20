@@ -1,0 +1,101 @@
+﻿<Window x:Class="テスト用ファイル大量作成ツール.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:テスト用ファイル大量作成ツール"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <StackPanel>
+        <DockPanel>
+            <Label Content="ベースフォルダ" Margin="10,10,10,10" />
+            <Button Content="参照" Width="100" DockPanel.Dock="Right" Margin="10,10,10,10" />
+            <TextBox x:Name="baseDir" VerticalAlignment="Center" Text="C:\test" />
+        </DockPanel>
+        <GroupBox  Margin="10,10,10,10">
+            <GroupBox.Header>
+                <CheckBox x:Name="fileCheck" Content="ファイル作成" 
+                          IsThreeState="False"
+                          Checked="fileCheck_Checked"
+                          Unchecked="fileCheck_Unchecked" />
+            </GroupBox.Header>
+            <StackPanel x:Name="fileStack">
+                <Label Content="ファイル名には連番用の&lt;連番i&gt;を必ず使用してください。"/>
+            <DockPanel>
+                <Label Content="ファイル名" Margin="10,0,10,0" />
+                    <ComboBox x:Name="SizeUnitCombo"
+                              SelectedValuePath="Id"
+                              DisplayMemberPath="Name"
+                              SelectedIndex="0"
+                              Width="80" DockPanel.Dock="Right" Margin="10,0,10,0" />
+                    <TextBox x:Name="fileSize" Text="0"
+                             Width="100" DockPanel.Dock="Right" VerticalAlignment="Center"/>
+                <Label Content="サイズ" 
+                       Margin="10,0,10,0"  DockPanel.Dock="Right"/>
+                <TextBox x:Name="fileNameI" 
+                         Text="&lt;連番i&gt;_test.txt"  VerticalAlignment="Center" />
+            </DockPanel>
+                <DockPanel>
+                    <Label Content="ファイル数" Margin="10,0,10,0" />
+                    <TextBox x:Name="varI"  Text="10"
+                             Width="100" VerticalAlignment="Center" />
+                    <CheckBox x:Name="fixI" Content="長さ固定" VerticalAlignment="Center" Margin="10,0,10,0" Width="100"/>
+                    <Label />
+                </DockPanel>
+            </StackPanel >
+
+        </GroupBox>
+
+        <GroupBox  Margin="10,10,10,0">
+            <GroupBox.Header>
+                <CheckBox x:Name="dirCheck" Content="フォルダ作成"
+                                                    IsThreeState="False"
+                          Checked="dirCheck_Checked"
+                          Unchecked="dirCheck_Unchecked"
+                          />
+            </GroupBox.Header>
+            <StackPanel x:Name="dirStack">
+                <Label Content="フォルダ名には連番用の&lt;連番j&gt;を必ず使用してください。"/>
+                <DockPanel>
+                    <Label Content="フォルダ名" Margin="10,0,10,0" DockPanel.Dock="Left"/>
+                    <CheckBox x:Name="fixJ" Content="長さ固定"  DockPanel.Dock="Right" Margin="10,0,10,0" VerticalAlignment="Center" />
+                    <TextBox x:Name="varJ" Width="100" DockPanel.Dock="Right" VerticalAlignment="Center" Text="10"/>
+
+                    <Label Content="ファイル数" Margin="10,0,10,0" DockPanel.Dock="Right" />
+                    <TextBox  x:Name="dirName" VerticalAlignment="Center" Text="&lt;連番j&gt;_test" />
+                </DockPanel>
+                <GroupBox  Margin="10,0,10,0">
+                    <GroupBox.Header>
+                        <CheckBox x:Name="childFileCheck" Content="フォルダ内ファイル作成" />
+                    </GroupBox.Header>
+                    <StackPanel >
+                        <Label Content="ファイル名には連番用の&lt;連番k&gt;を必ず使用してください。&lt;連番j&gt;の使用も可能です。"/>
+                        <DockPanel>
+                            <Label Content="ファイル名" Margin="10,0,10,0" />
+                            <ComboBox x:Name="childSizeUnitCombo"
+                              SelectedValuePath="Id"
+                              DisplayMemberPath="Name"
+                              SelectedIndex="0"
+                              Width="80" DockPanel.Dock="Right" Margin="10,0,10,0" />
+                            <TextBox Width="100" DockPanel.Dock="Right" VerticalAlignment="Center"/>
+                            <Label Content="サイズ" Margin="10,0,10,0"  DockPanel.Dock="Right"/>
+                            <TextBox VerticalAlignment="Center" />
+                        </DockPanel>
+                        <DockPanel>
+                            <Label Content="ファイル数" Margin="10,0,10,0" />
+                            <TextBox x:Name="varK" Width="100" VerticalAlignment="Center" />
+                            <CheckBox x:Name="fixK" Content="長さ固定" VerticalAlignment="Center" Margin="10,0,10,0" />
+                            <Label />
+                        </DockPanel>
+                    </StackPanel >
+
+                </GroupBox>
+            </StackPanel >
+
+        </GroupBox>
+        <Button Content="作成" Height="40" Margin="15" Click="Button_Click"/>
+    </StackPanel>
+
+
+</Window>

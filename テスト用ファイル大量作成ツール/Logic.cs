@@ -33,5 +33,33 @@ namespace テスト用ファイル大量作成ツール
             }
             return true;
         }
+
+        public static bool createDirVarJAndDirFileVarK(string dir, string dirName, int numberJ, bool isFixJ,
+            string fileName, int numberK, bool isFixK)
+        {
+            List<string> dirsName = CreateName.createDirListVarJ(dirName, numberJ, isFixJ);
+            int i = 0;
+            foreach (string name in dirsName)
+            {
+                i++;
+                if (!FileDirUtil.CreateDir(dir, name))
+                {
+                    return false;
+                }
+                else
+                {
+                    List<string> filesName = CreateName.createDirFileListVarK(fileName, numberK, isFixK, i);
+                    foreach (string f in filesName)
+                    {
+                        if (!FileDirUtil.CreateFile(dir + "/" + name, f, 0))
+                        {
+                            return false;
+                        }
+                    }
+                    
+                }
+            }
+            return true;
+        }
     }
 }

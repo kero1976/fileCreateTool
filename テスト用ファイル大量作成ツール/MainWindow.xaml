@@ -25,7 +25,7 @@
             <DockPanel>
                 <Label Content="ファイル名" Margin="10,0,10,0" />
                     <ComboBox x:Name="SizeUnitCombo"
-                              SelectedValuePath="Id"
+                              SelectedValuePath="Size"
                               DisplayMemberPath="Name"
                               SelectedIndex="0"
                               Width="80" DockPanel.Dock="Right" Margin="10,0,10,0" />
@@ -67,20 +67,23 @@
                 </DockPanel>
                 <GroupBox  Margin="10,0,10,0">
                     <GroupBox.Header>
-                        <CheckBox x:Name="childFileCheck" Content="フォルダ内ファイル作成" />
+                        <CheckBox x:Name="childFileCheck" Content="フォルダ内ファイル作成"
+                                                                                      IsThreeState="False"
+                          Checked="dirFileCheck_Checked"
+                          Unchecked="dirFileCheck_Unchecked"/>
                     </GroupBox.Header>
-                    <StackPanel >
+                    <StackPanel x:Name="dirFileStack">
                         <Label Content="ファイル名には連番用の&lt;連番k&gt;を必ず使用してください。&lt;連番j&gt;の使用も可能です。"/>
                         <DockPanel>
                             <Label Content="ファイル名" Margin="10,0,10,0" />
                             <ComboBox x:Name="childSizeUnitCombo"
-                              SelectedValuePath="Id"
+                              SelectedValuePath="Size"
                               DisplayMemberPath="Name"
                               SelectedIndex="0"
                               Width="80" DockPanel.Dock="Right" Margin="10,0,10,0" />
                             <TextBox Width="100" DockPanel.Dock="Right" VerticalAlignment="Center"/>
                             <Label Content="サイズ" Margin="10,0,10,0"  DockPanel.Dock="Right"/>
-                            <TextBox VerticalAlignment="Center" />
+                            <TextBox VerticalAlignment="Center" x:Name="dirFileNameK" />
                         </DockPanel>
                         <DockPanel>
                             <Label Content="ファイル数" Margin="10,0,10,0" />

@@ -61,9 +61,10 @@ namespace テスト用ファイル大量作成ツール
         {
             if (createFile)
             {
-                
+                SizeUnit size = (SizeUnit)SizeUnitCombo.SelectedItem;
+
                 //MessageBox.Show($"fileNameI:{fileNameI.Text},varI:{varI.Text},fixI{fixI.IsChecked},size:{fileSize.Text},Unit:{SizeUnitCombo.Text}");
-                bool result = Logic.createFileVarI(baseDir.Text, fileNameI.Text, int.Parse(varI.Text), (bool)fixI.IsChecked, long.Parse(fileSize.Text));
+                bool result = Logic.createFileVarI(baseDir.Text, fileNameI.Text, int.Parse(varI.Text), (bool)fixI.IsChecked, long.Parse(fileSize.Text) * size.Size);
                 if (result)
                 {
                     MessageBox.Show("ファイルを作成しました");
@@ -75,16 +76,35 @@ namespace テスト用ファイル大量作成ツール
             }
             if (createDir)
             {
-                MessageBox.Show($"fileNameI:{dirName.Text},varI:{varJ.Text},fixI{fixJ.IsChecked}");
-                bool result = Logic.createDirVarJ(baseDir.Text, dirName.Text, int.Parse(varJ.Text), (bool)fixJ.IsChecked);
-                if (result)
+                if (createDirFile)
                 {
-                    MessageBox.Show("フォルダを作成しました");
+                    bool result = Logic.createDirVarJAndDirFileVarK(
+                        baseDir.Text, dirName.Text, int.Parse(varJ.Text), (bool)fixJ.IsChecked,
+                        dirFileNameK.Text, int.Parse(varK.Text), (bool)fixK.IsChecked);
+                    if (result)
+                    {
+                        MessageBox.Show("フォルダを作成しました");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fileフォルダの作成に失敗しました");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Fileフォルダの作成に失敗しました");
+                    // フォルダのみを作成
+                    //MessageBox.Show($"fileNameI:{dirName.Text},varI:{varJ.Text},fixI{fixJ.IsChecked}");
+                    bool result = Logic.createDirVarJ(baseDir.Text, dirName.Text, int.Parse(varJ.Text), (bool)fixJ.IsChecked);
+                    if (result)
+                    {
+                        MessageBox.Show("フォルダを作成しました");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Fileフォルダの作成に失敗しました");
+                    }
                 }
+
             }
         }
 
@@ -98,6 +118,18 @@ namespace テスト用ファイル大量作成ツール
         {
             dirStack.IsEnabled = false;
             createDir = false;
+        }
+
+        private void dirFileCheck_Checked(object sender, RoutedEventArgs e)
+        {
+            dirFileStack.IsEnabled = true;
+            createDirFile = true;
+        }
+
+        private void dirFileCheck_Unchecked(object sender, RoutedEventArgs e)
+        {
+            dirFileStack.IsEnabled = false;
+            createDirFile = false;
         }
     }
 }

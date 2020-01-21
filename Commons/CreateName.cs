@@ -48,6 +48,35 @@ namespace Commons
             return result;
         }
 
+        public static List<string> createDirFileListVarK(string dirName, int number, bool isFix, int j)
+        {
+            logger.Debug($"dirName:{dirName},number:{number},isFix:{isFix},i{j}");
+
+            if (!dirName.Contains("<連番k>"))
+            {
+                logger.Debug("フォルダ名の値が不正です");
+                return null;
+            }
+            List<string> result = new List<string>();
+
+            if (isFix)
+            {
+                string format = fixFormat(number);
+                for (int i = 1; i <= number; i++)
+                {
+                    result.Add(dirName.Replace("<連番k>", String.Format(format, i).Replace("<連番j>",j.ToString())));
+                }
+            }
+            else
+            {
+                for (int i = 1; i <= number; i++)
+                {
+                    result.Add(dirName.Replace("<連番k>", i.ToString()).Replace("<連番j>",j.ToString()));
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// フォルダリスト(連番j)作成
         /// </summary>
